@@ -1,0 +1,8 @@
+C:\Users\Jesse\source\repos\SchetsEditor\bin\Debug\SchetsEditor.exe
+C:\Users\Jesse\source\repos\SchetsEditor\bin\Debug\SchetsEditor.pdb
+C:\Users\Jesse\source\repos\SchetsEditor\obj\Debug\SchetsEditor2008.csprojAssemblyReference.cache
+C:\Users\Jesse\source\repos\SchetsEditor\obj\Debug\SchetsEditor.Properties.Resources.resources
+C:\Users\Jesse\source\repos\SchetsEditor\obj\Debug\SchetsEditor2008.csproj.GenerateResource.cache
+C:\Users\Jesse\source\repos\SchetsEditor\obj\Debug\SchetsEditor2008.csproj.CoreCompileInputs.cache
+C:\Users\Jesse\source\repos\SchetsEditor\obj\Debug\SchetsEditor.exe
+C:\Users\Jesse\source\repos\SchetsEditor\obj\Debug\SchetsEditor.pdb
