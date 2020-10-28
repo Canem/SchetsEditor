@@ -45,7 +45,9 @@ namespace SchetsEditor
         {
             ISchetsTool[] deTools = { new PenTool()         
                                     , new LijnTool()
-                                    , new RechthoekTool()
+                                    , new CirkelTool()
+                                    , new VolCirkelTool()
+                                    , new RechthoekTool()                                    
                                     , new VolRechthoekTool()
                                     , new TekstTool()
                                     , new GumTool()

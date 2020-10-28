@@ -63,6 +63,26 @@ namespace SchetsEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cirkel {
+            get {
+                object obj = ResourceManager.GetObject("cirkel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cirkel_vol {
+            get {
+                object obj = ResourceManager.GetObject("cirkel vol", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gum {
             get {
                 object obj = ResourceManager.GetObject("gum", resourceCulture);
