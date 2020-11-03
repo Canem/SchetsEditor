@@ -41,7 +41,7 @@ namespace SchetsEditor
             this.Close();
         }
 
-        public SchetsWin()
+        public SchetsWin(Elementen elementen)
         {
             ISchetsTool[] deTools = { new PenTool()         
                                     , new LijnTool()

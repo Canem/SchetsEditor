@@ -7,6 +7,7 @@ namespace SchetsEditor
     public interface ISchetsTool
     {
         void MuisVast(SchetsControl s, Point p);
+        void MuisVirtueel(SchetsControl s, Point p);
         void MuisDrag(SchetsControl s, Point p);
         void MuisLos(SchetsControl s, Point p);
         void Letter(SchetsControl s, char c);
@@ -17,14 +18,17 @@ namespace SchetsEditor
         protected Point startpunt;
         protected Brush kwast;
         public virtual void MuisVast(SchetsControl s, Point p)
-        {   startpunt = p;
+        {
+            this.MuisVirtueel(s, p);
+            s.elementen.Toevoegen(new TekenElement(this, startpunt, s.PenKleur));
+        }
+
+        public void MuisVirtueel(SchetsControl s, Point p)
+        {
+            startpunt = p;
         }
         public virtual void MuisLos(SchetsControl s, Point p)
         {   kwast = new SolidBrush(s.PenKleur);
-            TekenElement t = new TekenElement();
-            t.Points.Add(p);
-            t.Kleur = s.PenKleur.ToString();
-            Elementen.tekenElementen.Toevoegen(t);
         }
         public abstract void MuisDrag(SchetsControl s, Point p);
         public abstract void Letter(SchetsControl s, char c);
@@ -79,6 +83,8 @@ namespace SchetsEditor
         {   base.MuisLos(s, p);
             this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p);
             s.Invalidate();
+
+            s.elementen.eindpuntToevoegen(p);
         }
         public override void Letter(SchetsControl s, char c)
         {

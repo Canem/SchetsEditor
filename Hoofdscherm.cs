@@ -40,7 +40,9 @@ namespace SchetsEditor
         }
 
         private void nieuw(object sender, EventArgs e)
-        {   SchetsWin s = new SchetsWin();
+        {
+            Elementen elementen = new Elementen();
+            SchetsWin s = new SchetsWin(elementen);
             s.MdiParent = this;
             s.Show();
         }

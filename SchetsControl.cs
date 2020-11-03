@@ -7,18 +7,23 @@ namespace SchetsEditor
 {   public class SchetsControl : UserControl
     {   private Schets schets;
         private Color penkleur;
+        public Elementen elementen;
         public Color PenKleur
-        { get { return penkleur; }
+        { 
+            get { return penkleur; }
+            set { penkleur = value; }
         }
         public Schets Schets
         { get { return schets;   }
         }
         public SchetsControl()
-        {   this.BorderStyle = BorderStyle.Fixed3D;
+        {
+            this.BorderStyle = BorderStyle.Fixed3D;
             this.schets = new Schets();
             this.Paint += this.teken;
             this.Resize += this.veranderAfmeting;
             this.veranderAfmeting(null, null);
+            this.elementen = new Elementen();
         }
         protected override void OnPaintBackground(PaintEventArgs e)
         {
@@ -51,6 +56,20 @@ namespace SchetsEditor
         public void VeranderKleurViaMenu(object obj, EventArgs ea)
         {   string kleurNaam = ((ToolStripMenuItem)obj).Text;
             penkleur = Color.FromName(kleurNaam);
+        }
+
+        public void tekenElemetenLijst()
+        {
+            Color huidigekleur = penkleur;
+            schets.Schoon();
+            Graphics g = MaakBitmapGraphics();
+
+            foreach(TekenElement tk in elementen.tekenElementen)
+            {
+                tk.teken(this);
+            }
+            this.Invalidate();
+            penkleur = huidigekleur;
         }
     }
 }
