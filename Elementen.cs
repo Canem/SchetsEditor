@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml.Serialization;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms.VisualStyles;
 
 namespace SchetsEditor
 {
@@ -62,6 +63,7 @@ namespace SchetsEditor
             }
         }
 
+
 		public void elementOmhoog(Point p)
 		{
 			for (int n = tekenElementen.Count - 1; n >= 0; n--)
@@ -96,6 +98,29 @@ namespace SchetsEditor
 				tekenElementen.RemoveAt(tekenElementen.Count - 1);
 		}
 
+
+		public void LeesVanFile(string naam)
+        {
+			StreamReader sr = new StreamReader(naam);
+			while(sr.Peek() >= 0)
+            {
+				tekenElementen = new List<TekenElement>();
+				string temp = sr.ReadLine();
+				string[] waarden = temp.Split('-');
+				int i = 0;
+				TekenElement t = new TekenElement(); 
+				t.soort = waarden[i];
+				//t.beginpunt[0] = 
+				//t.eindpunt[0] = 
+				//t.kleur = 
+				//t.tekst =
+				tekenElementen.Add(t);
+				SchetsControl schetscontrol = new SchetsControl();
+				t.teken(schetscontrol);
+				i++;
+			}
+        }
+
 		public void opslaan()
 		{
 			SaveFileDialog dialoog = new SaveFileDialog();
@@ -103,19 +128,16 @@ namespace SchetsEditor
 			dialoog.Title = "Schets opslaan als...";
 			if (dialoog.ShowDialog() == DialogResult.OK)
 			{
-				TextWriter sr = new StreamWriter(dialoog.FileName);
+				TextWriter sw = new StreamWriter(dialoog.FileName);
 				for (int i = 0; i < tekenElementen.Count; i++)
 				{
-					sr.WriteLine(tekenElementen[i]);
+					string bp = tekenElementen[i].beginpunt[0].ToString();
+					string ep = tekenElementen[i].eindpunt[0].ToString();
+					sw.WriteLine($"{tekenElementen[i].soort}-{bp}-{ep}-{tekenElementen[i].kleur}-{tekenElementen[i].tekst}");
 				}
-				sr.Close();
+				sw.Close();
 			}
-		}
-
-		public void openen()
-		{
-		}
-
+		} 
 	}
 }
 
