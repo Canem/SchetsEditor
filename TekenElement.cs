@@ -11,7 +11,6 @@ namespace SchetsEditor
 	//Klasse voor het maken van een Tekenelement
 	public class TekenElement
 	{
-<<<<<<< HEAD
 		private string soort;
 		private List<Point> beginpunt, eindpunt;
 		private Color kleur;
@@ -19,16 +18,6 @@ namespace SchetsEditor
 		ISchetsTool tool;
 		private int lijnDikte;
 		public TekenElement(ISchetsTool t, Point p, Color c, int dikte)
-=======
-		const float EPSILON = 0.001f;
-		public string soort;
-		public List<Point> beginpunt, eindpunt;
-		public Color kleur;
-		public string tekst;
-		ISchetsTool tool;
-		public int lijnDikte;
-		public TekenElement(ISchetsTool t, Point p, Color c)
->>>>>>> elements
 		{
 			tool = t;
 			soort = tool.ToString();
@@ -39,6 +28,8 @@ namespace SchetsEditor
 			tekst = "";
 			lijnDikte = dikte;
 		}
+
+		public TekenElement(){ }
 
 		public void zetEindpunt(Point p)
         {
@@ -124,11 +115,8 @@ namespace SchetsEditor
 			return new Point(x, y);
 		}
 
-<<<<<<< HEAD
+
 		bool inEllipse(Point p, Point begin, Point eind, double dikte = 0)
-=======
-		/*bool puntOpLijn(Point p)
->>>>>>> elements
         {
 			double res;
 

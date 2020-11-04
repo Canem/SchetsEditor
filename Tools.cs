@@ -181,7 +181,6 @@ namespace SchetsEditor
         {
             s.elementen.verwijderElement(p);
             s.tekenElementenLijst();
-<<<<<<< HEAD
         }
 
         public override void MuisLos(SchetsControl s, Point p) { }
@@ -206,8 +205,6 @@ namespace SchetsEditor
             }
             
             s.tekenElementenLijst();
-=======
->>>>>>> elements
         }
 
         public override void MuisLos(SchetsControl s, Point p) { }
