@@ -13,8 +13,6 @@ namespace SchetsEditor
     {
         MenuStrip menuStrip;
         SchetsControl schetscontrol;
-        TekenElement tekenElement;
-        Elementen elementen;
         ISchetsTool huidigeTool;
         Panel paneel;
         bool vast;
@@ -22,6 +20,17 @@ namespace SchetsEditor
             = new ResourceManager("SchetsEditor.Properties.Resources"
                                  , Assembly.GetExecutingAssembly()
                                  );
+
+        ISchetsTool[] deTools = { new PenTool()
+                                    , new LijnTool()
+                                    , new CirkelTool()
+                                    , new VolCirkelTool()
+                                    , new RechthoekTool()
+                                    , new VolRechthoekTool()
+                                    , new TekstTool()
+                                    , new GumTool()
+                                    , new LiftTool()
+                                    };
 
         private void veranderAfmeting(object o, EventArgs ea)
         {
@@ -50,18 +59,14 @@ namespace SchetsEditor
             schetscontrol.elementen.opslaan();
         }
 
-        public SchetsWin(Elementen elementen)
+        public void open(object o, EventArgs ea)
         {
-            ISchetsTool[] deTools = { new PenTool()         
-                                    , new LijnTool()
-                                    , new CirkelTool()
-                                    , new VolCirkelTool()
-                                    , new RechthoekTool()                                    
-                                    , new VolRechthoekTool()
-                                    , new TekstTool()
-                                    , new GumTool()
-                                    , new LiftTool()
-                                    };
+            schetscontrol.open(deTools);
+        }
+
+        public SchetsWin()
+        {
+            
             String[] deKleuren = { "Black", "Red", "Green", "Blue"
                                  , "Yellow", "Magenta", "Cyan", "White"
                                  };
@@ -130,6 +135,7 @@ namespace SchetsEditor
             ToolStripMenuItem menu = new ToolStripMenuItem("Aktie");
             menu.DropDownItems.Add("Clear", null, schetscontrol.Schoon );
             menu.DropDownItems.Add("Roteer", null, schetscontrol.Roteer );
+            menu.DropDownItems.Add("Open schets", null, this.open );
             ToolStripMenuItem submenu = new ToolStripMenuItem("Kies kleur");
             foreach (string k in kleuren)
                 submenu.DropDownItems.Add(k, null, schetscontrol.VeranderKleurViaMenu);

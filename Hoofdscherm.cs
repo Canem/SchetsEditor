@@ -42,8 +42,7 @@ namespace SchetsEditor
 
         private void nieuw(object sender, EventArgs e)
         {
-            Elementen elementen = new Elementen();
-            SchetsWin s = new SchetsWin(elementen);
+            SchetsWin s = new SchetsWin();
             s.MdiParent = this;
             s.Show();
         }
@@ -55,9 +54,9 @@ namespace SchetsEditor
             if (dialoog.ShowDialog() == DialogResult.OK)
             {
                 Elementen e = new Elementen();
-                SchetsWin s = new SchetsWin(e);
+                //e.LeesVanFile(dialoog.FileName);
+                SchetsWin s = new SchetsWin();
                 s.MdiParent = this;
-                e.LeesVanFile(dialoog.FileName);
                 s.Show();
             }
 

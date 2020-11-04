@@ -76,6 +76,18 @@ namespace SchetsEditor
             elementen.verwijderLaatste();
             tekenElementenLijst();
         }
+
+        public void open(ISchetsTool[] tools)
+        {
+            OpenFileDialog dialoog = new OpenFileDialog();
+            dialoog.Filter = "Tekstfiles|*.txt|Alle files|*.*";
+            dialoog.Title = "Opnenen";
+            if (dialoog.ShowDialog() == DialogResult.OK)
+            {
+                elementen.LeesVanFile(dialoog.FileName, tools);
+            }
+            tekenElementenLijst();
+        }
         public void tekenElementenLijst()
         {
             Color huidigekleur = penkleur;

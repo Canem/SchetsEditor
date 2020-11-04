@@ -99,25 +99,26 @@ namespace SchetsEditor
 		}
 
 
-		public void LeesVanFile(string naam)
+		public void LeesVanFile(string naam, ISchetsTool[] deTools)
         {
 			StreamReader sr = new StreamReader(naam);
-			while(sr.Peek() >= 0)
+			tekenElementen = new List<TekenElement>();
+			while (sr.Peek() >= 0)
             {
-				tekenElementen = new List<TekenElement>();
 				string temp = sr.ReadLine();
 				string[] waarden = temp.Split('-');
-				int i = 0;
-				TekenElement t = new TekenElement(); 
-				t.soort = waarden[i];
-				//t.beginpunt[0] = 
-				//t.eindpunt[0] = 
-				//t.kleur = 
-				//t.tekst =
+				string[] begincoord = waarden[1].Split(',');
+				string[] eindcoord = waarden[2].Split(',');
+
+				string soort = waarden[0];
+				Point beginPunt = new Point(int.Parse(begincoord[0]), int.Parse(begincoord[1]));
+				Point eindpunt = new Point(int.Parse(eindcoord[0]), int.Parse(eindcoord[1]));
+				Color kleur = Color.FromName(waarden[3]);
+				string tekst = waarden[4];
+
+				TekenElement t = new TekenElement(new CirkelTool(), beginPunt, kleur, 3);
+				t.zetEindpunt(eindpunt);
 				tekenElementen.Add(t);
-				SchetsControl schetscontrol = new SchetsControl();
-				t.teken(schetscontrol);
-				i++;
 			}
         }
 
@@ -129,11 +130,9 @@ namespace SchetsEditor
 			if (dialoog.ShowDialog() == DialogResult.OK)
 			{
 				TextWriter sw = new StreamWriter(dialoog.FileName);
-				for (int i = 0; i < tekenElementen.Count; i++)
-				{
-					string bp = tekenElementen[i].beginpunt[0].ToString();
-					string ep = tekenElementen[i].eindpunt[0].ToString();
-					sw.WriteLine($"{tekenElementen[i].soort}-{bp}-{ep}-{tekenElementen[i].kleur}-{tekenElementen[i].tekst}");
+				foreach(TekenElement tk in tekenElementen)
+                {
+					sw.WriteLine(tk.ToString());
 				}
 				sw.Close();
 			}
