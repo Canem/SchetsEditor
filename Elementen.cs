@@ -36,6 +36,18 @@ namespace SchetsEditor
 			tekenElementen[tekenElementen.Count - 1].zetEindpunt(p);
         }
 
+		//Add beginpooint to last item in list
+		public void beginPuntToevoegen(Point p)
+        {
+			tekenElementen[tekenElementen.Count - 1].beginPuntToevoegen(p);
+		}
+
+		public void charToevoegen(char c)
+        {
+			tekenElementen[tekenElementen.Count - 1].charToevoegen(c);
+
+		}
+
 
 		//Delete teken element that is clicked on in new gum
 		public void verwijderElement(Point p)
@@ -49,6 +61,40 @@ namespace SchetsEditor
                 }
             }
         }
+
+		public void elementOmhoog(Point p)
+		{
+			for (int n = tekenElementen.Count - 1; n >= 0; n--)
+			{
+				if (tekenElementen[n].raakKlik(p))
+				{
+					TekenElement oud = tekenElementen[n];
+					tekenElementen.RemoveAt(n);
+					tekenElementen.Add(oud);
+					break;
+				}
+			}
+		}
+
+		public void elementOmlaag(Point p)
+		{
+			for (int n = tekenElementen.Count - 1; n >= 0; n--)
+			{
+				if (tekenElementen[n].raakKlik(p))
+				{
+					TekenElement oud = tekenElementen[n];
+					tekenElementen.RemoveAt(n);
+					tekenElementen.Insert(0, oud);
+					break;
+				}
+			}
+		}
+
+		public void verwijderLaatste()
+        {
+			if(tekenElementen.Count > 0)
+				tekenElementen.RemoveAt(tekenElementen.Count - 1);
+		}
 
 		public void opslaan()
 		{

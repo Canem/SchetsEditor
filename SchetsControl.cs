@@ -8,6 +8,13 @@ namespace SchetsEditor
     {   private Schets schets;
         private Color penkleur;
         public Elementen elementen;
+        private int pendikte;
+
+        public int PenDikte
+        {
+            get { return pendikte; }
+            set { pendikte = value;  }
+        }
         public Color PenKleur
         { 
             get { return penkleur; }
@@ -49,6 +56,12 @@ namespace SchetsEditor
             schets.Roteer();
             this.Invalidate();
         }
+        public void VeranderDikte(object obj, EventArgs ea)
+        {
+            string dikte = ((ComboBox)obj).Text;
+            pendikte = Int32.Parse(dikte);
+        }
+
         public void VeranderKleur(object obj, EventArgs ea)
         {   string kleurNaam = ((ComboBox)obj).Text;
             penkleur = Color.FromName(kleurNaam);
@@ -58,9 +71,15 @@ namespace SchetsEditor
             penkleur = Color.FromName(kleurNaam);
         }
 
+        public void Undo(object o, EventArgs ea)
+        {
+            elementen.verwijderLaatste();
+            tekenElementenLijst();
+        }
         public void tekenElementenLijst()
         {
             Color huidigekleur = penkleur;
+            int huidigedikte = pendikte;
             schets.Schoon();
             Graphics g = MaakBitmapGraphics();
 
@@ -70,6 +89,7 @@ namespace SchetsEditor
             }
             this.Invalidate();
             penkleur = huidigekleur;
+            pendikte = huidigedikte;
         }
     }
 }

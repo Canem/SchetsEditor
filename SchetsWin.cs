@@ -65,10 +65,12 @@ namespace SchetsEditor
                                     , new VolRechthoekTool()
                                     , new TekstTool()
                                     , new GumTool()
+                                    , new LiftTool()
                                     };
             String[] deKleuren = { "Black", "Red", "Green", "Blue"
-                                 , "Yellow", "Magenta", "Cyan" 
+                                 , "Yellow", "Magenta", "Cyan", "White"
                                  };
+            int[] diktes = { 3, 4, 5, 6, 7, 8, 9, 10 };
 
             this.ClientSize = new Size(700, 500);
             huidigeTool = deTools[0];
@@ -77,7 +79,7 @@ namespace SchetsEditor
             schetscontrol.Location = new Point(64, 10);
             schetscontrol.MouseDown += (object o, MouseEventArgs mea) =>
                                        {   vast=true;  
-                                           huidigeTool.MuisVast(schetscontrol, mea.Location); 
+                                           huidigeTool.MuisVast(schetscontrol, mea.Location, mea.Button); 
                                        };
             schetscontrol.MouseMove += (object o, MouseEventArgs mea) =>
                                        {   if (vast)
@@ -100,7 +102,7 @@ namespace SchetsEditor
             this.maakToolMenu(deTools);
             this.maakAktieMenu(deKleuren);
             this.maakToolButtons(deTools);
-            this.maakAktieButtons(deKleuren);
+            this.maakAktieButtons(deKleuren, diktes);
             this.Resize += this.veranderAfmeting;
             this.veranderAfmeting(null, null);
         }
@@ -148,8 +150,8 @@ namespace SchetsEditor
             {
                 RadioButton b = new RadioButton();
                 b.Appearance = Appearance.Button;
-                b.Size = new Size(45, 62);
-                b.Location = new Point(10, 10 + t * 62);
+                b.Size = new Size(45, 45);
+                b.Location = new Point(10, 10 + t * 45);
                 b.Tag = tool;
                 b.Text = tool.ToString();
                 b.Image = (Image)resourcemanager.GetObject(tool.ToString());
@@ -162,13 +164,13 @@ namespace SchetsEditor
             }
         }
 
-        private void maakAktieButtons(String[] kleuren)
+        private void maakAktieButtons(String[] kleuren, int[] diktes)
         {   
             paneel = new Panel();
             paneel.Size = new Size(600, 24);
             this.Controls.Add(paneel);
             
-            Button b; Label l; ComboBox cbb;
+            Button b; Label l; ComboBox cbb; Label dl; ComboBox dikteMenu; Button ub;
             b = new Button(); 
             b.Text = "Clear";  
             b.Location = new Point(  0, 0); 
@@ -194,6 +196,27 @@ namespace SchetsEditor
                 cbb.Items.Add(k);
             cbb.SelectedIndex = 0;
             paneel.Controls.Add(cbb);
+
+            dl = new Label();
+            dl.Text = "Pen Dikte:";
+            dl.Location = new Point(340, 3);
+            dl.AutoSize = true;
+            paneel.Controls.Add(dl);
+
+            dikteMenu = new ComboBox();
+            dikteMenu.Location = new Point(400, 0);
+            dikteMenu.DropDownStyle = ComboBoxStyle.DropDownList;
+            dikteMenu.SelectedValueChanged += schetscontrol.VeranderDikte;
+            foreach (int i in diktes)
+                dikteMenu.Items.Add(i);
+            dikteMenu.SelectedIndex = 0;
+            paneel.Controls.Add(dikteMenu);
+
+            ub = new Button();
+            ub.Text = "Undo";
+            ub.Location = new Point(530, 0);
+            ub.Click += schetscontrol.Undo;
+            paneel.Controls.Add(ub);
         }
     }
 }
