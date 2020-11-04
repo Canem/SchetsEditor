@@ -4,13 +4,17 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Resources;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace SchetsEditor
 {
     public class SchetsWin : Form
-    {   
+    {
         MenuStrip menuStrip;
         SchetsControl schetscontrol;
+        TekenElement tekenElement;
+        Elementen elementen;
         ISchetsTool huidigeTool;
         Panel paneel;
         bool vast;
@@ -39,6 +43,16 @@ namespace SchetsEditor
         private void afsluiten(object obj, EventArgs ea)
         {
             this.Close();
+        }
+
+        private void openen(object o, EventArgs ea)
+        {
+            schetscontrol.elementen.openen();
+        }
+
+        private void opslaan(object o, EventArgs ea)
+        {
+            schetscontrol.elementen.opslaan();
         }
 
         public SchetsWin(Elementen elementen)
@@ -95,6 +109,8 @@ namespace SchetsEditor
         {   
             ToolStripMenuItem menu = new ToolStripMenuItem("File");
             menu.MergeAction = MergeAction.MatchOnly;
+            menu.DropDownItems.Add("Openen", null, this.openen);
+            menu.DropDownItems.Add("Opslaan", null, this.opslaan);
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
             menuStrip.Items.Add(menu);
         }

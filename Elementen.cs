@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
+using System.IO;
+using System.Xml.Serialization;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SchetsEditor
 {
@@ -11,7 +15,7 @@ namespace SchetsEditor
 		public List<TekenElement> tekenElementen = new List<TekenElement>();
 		public Elementen()
 		{
-			
+			Wissen();
 		}
 
 		//Maakt een nieuwe lege lijst
@@ -32,6 +36,7 @@ namespace SchetsEditor
 			tekenElementen[tekenElementen.Count - 1].zetEindpunt(p);
         }
 
+
 		//Delete teken element that is clicked on in new gum
 		public void verwijderElement(Point p)
         {
@@ -44,6 +49,27 @@ namespace SchetsEditor
                 }
             }
         }
+
+		public void opslaan()
+		{
+			SaveFileDialog dialoog = new SaveFileDialog();
+			dialoog.Filter = "Tekstfiles|*.txt|Alle files|*.*";
+			dialoog.Title = "Schets opslaan als...";
+			if (dialoog.ShowDialog() == DialogResult.OK)
+			{
+				TextWriter sr = new StreamWriter(dialoog.FileName);
+				for (int i = 0; i < tekenElementen.Count; i++)
+				{
+					sr.WriteLine(tekenElementen[i]);
+				}
+				sr.Close();
+			}
+		}
+
+		public void openen()
+		{
+		}
+
 	}
 }
 
