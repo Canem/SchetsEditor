@@ -10,12 +10,12 @@ namespace SchetsEditor
 	public class TekenElement
 	{
 		const float EPSILON = 0.001f;
-		private string soort;
-		private List<Point> beginpunt, eindpunt;
-		private Color kleur;
-		private string tekst;
+		public string soort;
+		public List<Point> beginpunt, eindpunt;
+		public Color kleur;
+		public string tekst;
 		ISchetsTool tool;
-		private int lijnDikte;
+		public int lijnDikte;
 		public TekenElement(ISchetsTool t, Point p, Color c)
 		{
 			tool = t;
@@ -76,7 +76,7 @@ namespace SchetsEditor
 			return new Point(x, y);
 		}
 
-		bool puntOpLijn(Point p)
+		/*bool puntOpLijn(Point p)
         {
 
 			Point beginPuntLijn = linksBoven();
@@ -89,7 +89,7 @@ namespace SchetsEditor
 
 			return false;
         }
-
+		*/
 		public void teken(SchetsControl s)
         {
 			for(int i = 0; i < beginpunt.Count; i++)

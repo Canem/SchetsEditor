@@ -160,7 +160,7 @@ namespace SchetsEditor
         public override void MuisVast(SchetsControl s, Point p)
         {
             s.elementen.verwijderElement(p);
-            s.tekenElemetenLijst();
+            s.tekenElementenLijst();
         }
 
         public override void MuisLos(SchetsControl s, Point p) { }

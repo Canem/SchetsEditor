@@ -45,11 +45,6 @@ namespace SchetsEditor
             this.Close();
         }
 
-        private void openen(object o, EventArgs ea)
-        {
-            schetscontrol.elementen.openen();
-        }
-
         private void opslaan(object o, EventArgs ea)
         {
             schetscontrol.elementen.opslaan();
@@ -109,7 +104,6 @@ namespace SchetsEditor
         {   
             ToolStripMenuItem menu = new ToolStripMenuItem("File");
             menu.MergeAction = MergeAction.MatchOnly;
-            menu.DropDownItems.Add("Openen", null, this.openen);
             menu.DropDownItems.Add("Opslaan", null, this.opslaan);
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
             menuStrip.Items.Add(menu);
