@@ -58,7 +58,7 @@ namespace SchetsEditor
             penkleur = Color.FromName(kleurNaam);
         }
 
-        public void tekenElemetenLijst()
+        public void tekenElementenLijst()
         {
             Color huidigekleur = penkleur;
             schets.Schoon();
