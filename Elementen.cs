@@ -31,6 +31,19 @@ namespace SchetsEditor
         {
 			tekenElementen[tekenElementen.Count - 1].zetEindpunt(p);
         }
+
+		//Delete teken element that is clicked on in new gum
+		public void verwijderElement(Point p)
+        {
+			for (int n = tekenElementen.Count - 1; n >= 0; n--)
+			{
+				if (tekenElementen[n].raakKlik(p))
+                {
+					tekenElementen.RemoveAt(n);
+					break;
+                }
+            }
+        }
 	}
 }
 
