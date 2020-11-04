@@ -51,7 +51,7 @@ namespace SchetsEditor
             }
         }
 
-		public void LeesVanFile(string naam)
+		public void xxLeesVanFile(string naam)
         {
 			StreamReader sr = new StreamReader(naam);
 			while(sr.Peek() >= 0)
@@ -72,23 +72,20 @@ namespace SchetsEditor
 				i++;
 			}
         }
+
 		public void opslaan()
-		{
+        {
 			SaveFileDialog dialoog = new SaveFileDialog();
-			dialoog.Filter = "Tekstfiles|*.txt|Alle files|*.*";
+			dialoog.Filter = "Schetsbestand|*.xml|Alle bestanden|*.*";
 			dialoog.Title = "Schets opslaan als...";
 			if (dialoog.ShowDialog() == DialogResult.OK)
-			{
-				TextWriter sw = new StreamWriter(dialoog.FileName);
-				for (int i = 0; i < tekenElementen.Count; i++)
-				{
-					string bp = tekenElementen[i].beginpunt[0].ToString();
-					string ep = tekenElementen[i].eindpunt[0].ToString();
-					sw.WriteLine($"{tekenElementen[i].soort}-{bp}-{ep}-{tekenElementen[i].kleur}-{tekenElementen[i].tekst}");
-				}
+            {
+				XmlSerializer s = new XmlSerializer(typeof(List<TekenElement>));
+				StreamWriter sw = new StreamWriter(dialoog.FileName);
+				s.Serialize(sw, tekenElementen);
 				sw.Close();
 			}
-		} 
+        } 
 	}
 }
 

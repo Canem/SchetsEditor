@@ -50,7 +50,7 @@ namespace SchetsEditor
             schetscontrol.elementen.opslaan();
         }
 
-        public SchetsWin(Elementen elementen)
+        public SchetsWin(Elementen elementen, string naam)
         {
             ISchetsTool[] deTools = { new PenTool()         
                                     , new LijnTool()

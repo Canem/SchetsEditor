@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace SchetsEditor
 {
     public class Hoofdscherm : Form
     {
         MenuStrip menuStrip;
-
+        SchetsControl schetscontrol = new SchetsControl();
         public Hoofdscherm()
         {   this.ClientSize = new Size(800, 600);
             menuStrip = new MenuStrip();
@@ -43,25 +45,22 @@ namespace SchetsEditor
         private void nieuw(object sender, EventArgs e)
         {
             Elementen elementen = new Elementen();
-            SchetsWin s = new SchetsWin(elementen);
+            SchetsWin s = new SchetsWin(elementen, null);
             s.MdiParent = this;
             s.Show();
         }
         private void openen(object o, EventArgs ea)
         {
             OpenFileDialog dialoog = new OpenFileDialog();
-            dialoog.Filter = "Tekstfiles|*.txt|Alle files|*.*";
+            dialoog.Filter = "Schetsbestand|*.xml|Alle bestanden|*.*";
             dialoog.Title = "Opnenen";
             if (dialoog.ShowDialog() == DialogResult.OK)
             {
-                Elementen e = new Elementen();
-                SchetsWin s = new SchetsWin(e);
+                //XmlReader r = XmlReader.Create();
+                SchetsWin s = new SchetsWin(null, dialoog.FileName);
                 s.MdiParent = this;
-                e.LeesVanFile(dialoog.FileName);
                 s.Show();
             }
-
-
         }
         private void afsluiten(object sender, EventArgs e)
         {   this.Close();

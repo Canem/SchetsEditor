@@ -28,6 +28,8 @@ namespace SchetsEditor
 			lijnDikte = 3;
 		}
 
+		public TekenElement(){ }
+
 		public void zetEindpunt(Point p)
         {
 			eindpunt.Add(p);
